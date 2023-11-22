@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 import Serch from './Serch';
-import FollowerPeople from './FollwerPeople';
+import FollowingPeople from './FollowingPeople';
 
 const Follow = () => {
   const [nickName, setNickName] = useState('');
@@ -24,10 +24,10 @@ const Follow = () => {
             marginTop: 10,
             fontWeight: 'bold',
           }}>
-          팔로워
+          팔로잉
         </Text>
       </View>
-      <FollowerPeople />
+      <FollowingPeople />
     </View>
   );
 };

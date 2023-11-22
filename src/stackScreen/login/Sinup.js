@@ -18,12 +18,16 @@ const SignupScreen = ({navigation}) => {
     } else {
       realm.write(() => {
         realm.create('User', {
+          _id: Math.floor(Math.random() * 1000) + 1,
           id: userId,
           password: password,
           address: address,
           username: username,
           userImg: '',
           nickName: '',
+          following: [],
+          followers: [],
+          post: [],
         });
         navigation.navigate('NickName', userId);
       });

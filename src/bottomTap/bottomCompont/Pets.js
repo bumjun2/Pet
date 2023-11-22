@@ -18,7 +18,6 @@ const Pets = ({navigation}) => {
   const [text, setText] = useState('');
   const [userNames, setUserNames] = useState([]);
   const {off} = useContext(Context);
-
   useEffect(() => {
     const fetchData = async () => {
       const names = [];
@@ -29,10 +28,13 @@ const Pets = ({navigation}) => {
             const user = realm
               .objects('User')
               .filtered('id = $0', off[i].id)[0];
+
             if (user) {
               names.push({
                 id: user.id,
                 userImg: user.userImg,
+                followers: user.followers,
+                following: user.following,
               });
             }
           });

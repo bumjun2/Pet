@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import UserPicture from '../../stackScreen/stackMyPage/UserPicture';
 import UserFollow from '../../stackScreen/stackMyPage/Follow/UserFollow';
 
@@ -11,34 +11,33 @@ import MyPageSave from '../../stackScreen/stackMyPage/MyPageSave';
 const MyPage = ({props, changeText, navigation}) => {
   const [list, setList] = useState(0);
   return (
-    <ScrollView style={{flex: 1, backgroundColor: '#ffff'}}>
-      <View>
-        <UserPicture props={props} changeText={changeText} />
-        <UserFollow navigation={navigation} />
-        <View
-          style={{
-            flex: 0.5,
-            marginTop: 20,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
-          <TouchableOpacity onPress={() => setList(0)}>
-            <Icon name="apps" size={30} color={'pink'} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setList(1)}>
-            <Icon name="bookmark-border" size={30} color={'pink'} />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flex: 0.5,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
-          {list === 1 ? <MyPageSave /> : <MyPageImg />}
-        </View>
+    <View
+      style={{
+        backgroundColor: '#fff',
+        flex: 1,
+      }}>
+      <UserPicture props={props} changeText={changeText} />
+      <UserFollow navigation={navigation} />
+      <View
+        style={{
+          marginTop: 20,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+        }}>
+        <TouchableOpacity onPress={() => setList(0)}>
+          <Icon name="apps" size={30} color={'pink'} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setList(1)}>
+          <Icon name="bookmark-border" size={30} color={'pink'} />
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+      <View
+        style={{
+          justifyContent: 'space-around',
+        }}>
+        {list === 1 ? <MyPageSave /> : <MyPageImg navigation={navigation} />}
+      </View>
+    </View>
   );
 };
 

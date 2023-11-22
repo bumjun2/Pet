@@ -55,7 +55,6 @@ const UserPicture = ({changeText}) => {
 const styles = StyleSheet.create({
   continue: {
     marginTop: 20,
-    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

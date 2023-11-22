@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Context from '../../stackShop/context/Context';
+import realm from '../../../realm/Realm';
 
 const UserFollow = ({navigation}) => {
+  const {on} = useContext(Context);
+
   return (
-    <View style={{flex: 1, marginTop: 40}}>
+    <View style={{marginTop: 40}}>
       <View
         style={{
-          flex: 0.5,
           flexDirection: 'row',
           justifyContent: 'space-around',
         }}>
@@ -15,15 +18,14 @@ const UserFollow = ({navigation}) => {
       </View>
       <View
         style={{
-          flex: 0.5,
           flexDirection: 'row',
           justifyContent: 'space-around',
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
-          <Text style={styles.font}>0</Text>
+          <Text style={styles.font}>{on.following.length}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Following')}>
-          <Text style={styles.font}>0</Text>
+          <Text style={styles.font}>{on.followers.length}</Text>
         </TouchableOpacity>
       </View>
     </View>
