@@ -1,10 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Context from '../stackShop/context/Context';
 import realm from '../../realm/Realm';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import SerachUserImg from './SerachUserImg';
 
-const SearchUser = ({route}) => {
+const SearchUser = ({route, navigation}) => {
   const {user} = route.params;
   const {on, setOn, off} = useContext(Context);
 
@@ -76,8 +78,6 @@ const SearchUser = ({route}) => {
             },
           ];
         }
-
-        console.log(offUser.following);
       } else {
         const userToDelete = realm
           .objects('Follower')
@@ -169,6 +169,7 @@ const SearchUser = ({route}) => {
           </TouchableOpacity>
         </View>
       </View>
+      <SerachUserImg user={user} navigation={navigation} />
     </View>
   );
 };

@@ -9,7 +9,7 @@ import Context from './context/Context';
 const Advertisement = ({navigation}) => {
   const [hover, setHover] = useState(false);
   const [search, setSearch] = useState(false);
-  const {data, setData} = useContext(Context);
+  const {on} = useContext(Context);
 
   const images = [
     require('../../assets/강아지.jpeg'),
@@ -34,7 +34,7 @@ const Advertisement = ({navigation}) => {
         <View style={{margin: 10, position: 'relative'}}>
           <TouchableOpacity onPress={() => navigation.navigate('Basket')}>
             <Icon name="shopping-basket" size={30} color={'black'} />
-            {data.length === 0 ? null : (
+            {on.basket.length === 0 ? null : (
               <Badge
                 style={{
                   position: 'absolute',
@@ -42,7 +42,7 @@ const Advertisement = ({navigation}) => {
                   bottom: 0,
                   backgroundColor: 'pink',
                 }}>
-                {data.length}
+                {on.basket.length}
               </Badge>
             )}
           </TouchableOpacity>

@@ -28,6 +28,7 @@ const Pets = ({navigation}) => {
             const user = realm
               .objects('User')
               .filtered('id = $0', off[i].id)[0];
+            console.log(user.post);
 
             if (user) {
               names.push({
@@ -35,6 +36,7 @@ const Pets = ({navigation}) => {
                 userImg: user.userImg,
                 followers: user.followers,
                 following: user.following,
+                post: user.post,
               });
             }
           });
@@ -115,9 +117,9 @@ const Pets = ({navigation}) => {
           </ScrollView>
         )
       ) : (
-        <ScrollView>
+        <View style={{height: '100%'}}>
           <PetsImg navigation={navigation} />
-        </ScrollView>
+        </View>
       )}
     </View>
   );

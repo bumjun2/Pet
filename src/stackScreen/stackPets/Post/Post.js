@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FlatList, Modal, StyleSheet, View} from 'react-native';
 
 import PetsPost from './PetsPost';
@@ -6,11 +6,15 @@ import PetsPost from './PetsPost';
 import ModalTitle from './Modal/ModalTitle';
 import ModalInput from './Modal/ModalInput';
 import ModalList from './Modal/ModalList';
+import realm from '../../../realm/Realm';
+import Context from '../../stackShop/context/Context';
 
-const Post = () => {
+const Post = ({route}) => {
+  const {post} = route.params;
+  const {on} = useContext(Context);
+
   const [isModalVisible, setModalVisible] = useState(false);
   const [text, setText] = useState('');
-  const [comments, setComments] = useState([]);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -28,18 +32,24 @@ const Post = () => {
   };
   const commentHandler = () => {
     comment();
+    realm.write(() => {
+      post.comment = [
+        ...post.comment,
+        {
+          nickName: on.nickName,
+          userImg: on.userImg,
+          comment: text,
+        },
+      ];
+    });
   };
   const comment = () => {
-    setComments(prevComments => [
-      ...prevComments,
-      {id: Math.floor(Math.random() * 1000) + 1, text: text},
-    ]);
     setText('');
   };
 
   return (
-    <View style={{flex: 1}}>
-      <PetsPost onModalToggle={handleModalToggle} />
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <PetsPost onModalToggle={handleModalToggle} post={post} />
       <Modal
         animationType="slide"
         transparent={true}
@@ -59,9 +69,8 @@ const Post = () => {
               text={text}
             />
             <FlatList
-              data={comments}
-              keyExtractor={item => item.id.toString()}
-              renderItem={({item}) => <ModalList text={item.text} />}
+              data={post.comment}
+              renderItem={({item}) => <ModalList item={item} post={post} />}
             />
           </View>
         </View>

@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import Context from '../stackShop/context/Context';
 
-const width_proportion = '33%';
-
 const PetsImg = ({navigation}) => {
   const {off} = useContext(Context);
 
@@ -18,7 +16,7 @@ const PetsImg = ({navigation}) => {
     <TouchableOpacity
       style={styles.imgs}
       onPress={() => {
-        navigation.navigate('PetsPost');
+        navigation.navigate('PetsPost', {post: item});
       }}>
       <Image
         source={{uri: item.img}}
@@ -26,23 +24,36 @@ const PetsImg = ({navigation}) => {
       />
     </TouchableOpacity>
   );
+  const flatListData = [];
 
-  const flatListData = off.flatMap(user => user.post);
+  for (let i = 0; i < off.length; i++) {
+    for (let j = 0; j < off[i].post.length; j++) {
+      flatListData.push(off[i].post[j]);
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <FlatList data={flatListData[0]} renderItem={renderItem} horizontal />
+      <FlatList
+        data={flatListData}
+        renderItem={renderItem}
+        nestedScrollEnabled={true}
+        numColumns={3}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imgs: {
+    margin: 10,
     borderRadius: 10,
-    width: width_proportion,
     height: 100,
   },
 });

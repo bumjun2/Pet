@@ -8,8 +8,10 @@ import {
   View,
 } from 'react-native';
 import Context, {ContextConsumer} from '../context/Context';
+import realm from '../../../realm/Realm';
 
-const Goods = ({route, navigation}, props) => {
+const Goods = ({route, navigation}) => {
+  const {on, setOn} = useContext(Context);
   const [Count, setCount] = useState(1);
   const {imageSource, title, price} = route.params;
   const [upPrice, setUpPrice] = useState(price);
@@ -29,6 +31,19 @@ const Goods = ({route, navigation}, props) => {
   const basket = () => {
     const newItem = {imageSource, title, upPrice, Count};
     setData([...data, newItem]);
+    realm.write(() => {
+      on.basket = [
+        ...on.basket,
+        {
+          id: Math.floor(Math.random() * 1000) + 1,
+          img: imageSource,
+          titel: title,
+          price: upPrice,
+          quantity: Count,
+        },
+      ];
+    });
+
     Alert.alert(title, '장바구니에 담겼습니다', [
       {
         text: '장바구니 보러가기',

@@ -20,6 +20,7 @@ const ModalInput = ({handlerModalList, commentHandler, text}) => {
 
 const styels = StyleSheet.create({
   input: {
+    padding: 5,
     borderRadius: 10,
     backgroundColor: '#ffff',
     borderColor: '#ccc',

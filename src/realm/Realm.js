@@ -28,6 +28,32 @@ class Post extends Realm.Object {
       img: 'string',
       nickName: 'string',
       title: 'string',
+      userImg: 'string',
+      comment: 'Comment[]',
+    },
+  };
+}
+
+class Comment extends Realm.Object {
+  static schema = {
+    name: 'Comment',
+    properties: {
+      nickName: 'string',
+      userImg: 'string',
+      comment: 'string',
+    },
+  };
+}
+
+class Basket extends Realm.Object {
+  static schema = {
+    name: 'Basket',
+    properties: {
+      id: 'int',
+      img: 'int',
+      titel: 'string',
+      price: 'int',
+      quantity: 'int',
     },
   };
 }
@@ -46,6 +72,7 @@ class User extends Realm.Object {
       followers: 'Follower[]',
       following: 'Following[]',
       post: 'Post[]',
+      basket: 'Basket[]',
     },
     primaryKey: 'id',
   };
@@ -54,8 +81,8 @@ class User extends Realm.Object {
 // 동적으로 스키마를 관리
 // realm.close();
 const realm = new Realm({
-  schema: [User, Follower, Following, Post],
-  schemaVersion: 12,
+  schema: [User, Follower, Following, Post, Comment, Basket],
+  schemaVersion: 22,
 });
 
 // console.log('Realm Path:', realm.path);

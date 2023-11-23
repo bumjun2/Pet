@@ -1,14 +1,11 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
-const PostUser = () => {
+const PostUser = ({post}) => {
   return (
     <View style={styles.continue}>
-      <Image
-        style={styles.userImage}
-        source={require('../../../assets/알파카.jpeg')}
-      />
-      <Text style={styles.userName}>귀여운 강아지</Text>
+      <Image style={styles.userImage} source={{uri: post.userImg}} />
+      <Text style={styles.userName}>{post.nickName}</Text>
     </View>
   );
 };

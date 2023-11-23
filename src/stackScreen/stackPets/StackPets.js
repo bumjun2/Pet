@@ -26,7 +26,6 @@ const StackPets = () => {
           title: 'Post',
         }}
       />
-
       <Stack.Screen
         name="SearchUser"
         component={SearchUser}

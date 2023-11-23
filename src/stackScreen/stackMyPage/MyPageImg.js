@@ -12,7 +12,10 @@ const MyPageImg = ({navigation}) => {
         onPress={() => {
           navigation.navigate('OldPost', {post: item});
         }}>
-        <Image source={{uri: item.img}} style={{width: 100, height: 100}} />
+        <Image
+          source={{uri: item.img}}
+          style={{width: 100, height: 100, borderRadius: 20}}
+        />
       </TouchableOpacity>
     </View>
   );

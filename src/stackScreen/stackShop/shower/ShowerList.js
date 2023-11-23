@@ -6,7 +6,7 @@ import FeedListItem from '../feed/FeedListItem';
 const data = [
   {
     key: '1',
-    imageSource: require('../../../assets/FeedList/list1.jpeg'),
+    imageSource: require('../../../assets/Shower/list1.jpeg'),
     title: '딩동펫 반려동물 말랑 샴푸 브러쉬',
     price: 5500,
   },
