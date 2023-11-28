@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Category = ({navigation}) => {
+const Category = ({navigation, data, data2, data3, data4}) => {
   return (
     <View
       style={{
@@ -18,7 +18,9 @@ const Category = ({navigation}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Feed', {});
+            navigation.navigate('Feed', {
+              data,
+            });
           }}>
           <View style={styles.category}>
             <Text style={{fontSize: 40}}>🍚</Text>
@@ -26,7 +28,9 @@ const Category = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Snack');
+            navigation.navigate('Snack', {
+              data4,
+            });
           }}>
           <View style={styles.category}>
             <Text style={{fontSize: 40}}>🍭</Text>
@@ -34,7 +38,9 @@ const Category = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Accessories');
+            navigation.navigate('Accessories', {
+              data3,
+            });
           }}>
           <View style={styles.category}>
             <Text style={{fontSize: 40}}>🎀</Text>
@@ -42,7 +48,9 @@ const Category = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Shower');
+            navigation.navigate('Shower', {
+              data2,
+            });
           }}>
           <View style={styles.category}>
             <Text style={{fontSize: 40}}>🛁</Text>

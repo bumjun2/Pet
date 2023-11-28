@@ -1,42 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import Order from '../feed/Order';
 import FeedListItem from '../feed/FeedListItem';
+import Context from '../context/Context';
 
-const data = [
-  {
-    key: '1',
-    imageSource: require('../../../assets/Accessories/list1.jpeg'),
-    title: '복자네일상 강아지머리핀 이쁜5종세트 악세서리 헤어핀 미간핀',
-    price: 8900,
-  },
-  {
-    key: '2',
-    imageSource: require('../../../assets/Accessories/list2.jpeg'),
-    title: '도그아이 애견용 모자 + 목도리 세트',
-    price: 8490,
-  },
-  {
-    key: '3',
-    imageSource: require('../../../assets/Accessories/list3.jpeg'),
-    title: '반려동물 앙증 앵두 니트 케이프',
-    price: 4900,
-  },
-  {
-    key: '4',
-    imageSource: require('../../../assets/Accessories/list4.jpeg'),
-    title: '도그아이 애견용 모자 + 목도리 세트',
-    price: 8490,
-  },
-  {
-    key: '5',
-    imageSource: require('../../../assets/Accessories/list5.jpeg'),
-    title: '도그아이 반려동물 썬캡',
-    price: 10900,
-  },
-];
-
-const AccessoriesList = ({navigation}) => {
+const AccessoriesList = ({navigation, data}) => {
   const [sortedData, setSortedData] = useState(data);
 
   const handleSort = option => {

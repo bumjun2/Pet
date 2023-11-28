@@ -10,22 +10,26 @@ import {
 } from 'react-native';
 import Context from '../../stackShop/context/Context';
 import realm from '../../../realm/Realm';
+import {useFocusEffect} from '@react-navigation/native';
 
 const OnMadalList = ({item}) => {
-  const {on} = useContext(Context);
+  const {on, setOn} = useContext(Context);
 
   const commentRemove = () => {
     realm.write(() => {
-      for (let i = 0; i < on.post[0].comment.length; i++) {
-        if (on.post[0].comment[i].nickName === item.nickName) {
-          Alert.alert('정말 삭제하시겠습니까', '', [
-            {
-              text: '네',
-              onPress: () =>
-                realm.write(() => realm.delete(on.post[0].comment[i])),
-            },
-            {text: '아니요', onPress: () => console.log('아니요 클릭됨')},
-          ]);
+      for (let i = 0; i < on.post.length; i++) {
+        for (let j = 0; j < on.post[i].comment.length; j++) {
+          if (on.post[i].comment[j].nickName === item.nickName) {
+            Alert.alert('정말 삭제하시겠습니까', '', [
+              {
+                text: '네',
+                onPress: () => {
+                  realm.write(() => realm.delete(on.post[i].comment[j]));
+                },
+              },
+              {text: '아니요', onPress: () => console.log('아니요 클릭됨')},
+            ]);
+          }
         }
       }
     });

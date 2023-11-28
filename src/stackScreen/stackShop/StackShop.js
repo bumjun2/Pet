@@ -7,6 +7,8 @@ import Accessories from './accessories/Accessories';
 import Shower from './shower/Shower';
 import Goods from './feed/Goods';
 import Basket from './basket/Basket';
+import Seach from './search/Seach';
+import Payment from './Pay/Payment';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +20,13 @@ const StackShop = () => {
         component={Shop}
         options={{
           title: 'Shop',
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={Seach}
+        options={{
           headerShown: false,
         }}
       />
@@ -61,6 +70,13 @@ const StackShop = () => {
         component={Basket}
         options={{
           title: 'Basket',
+        }}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        options={{
+          title: 'Payment',
         }}
       />
     </Stack.Navigator>

@@ -68,7 +68,7 @@ class User extends Realm.Object {
       address: 'string',
       username: 'string',
       nickName: 'string',
-      userImg: 'string',
+      userImg: 'string?',
       followers: 'Follower[]',
       following: 'Following[]',
       post: 'Post[]',
@@ -78,17 +78,56 @@ class User extends Realm.Object {
   };
 }
 
+class SearchRanking extends Realm.Object {
+  static schema = {
+    name: 'SearchRanking',
+    properties: {
+      text: 'string',
+      count: 'int',
+      img: 'int',
+      price: 'int',
+    },
+  };
+}
+
+class Marker extends Realm.Object {
+  static schema = {
+    name: 'Marker',
+    properties: {
+      id: 'string',
+      maker: 'string',
+      nickName: 'string',
+      img: 'string',
+      comment: 'string',
+    },
+  };
+}
+
 // 동적으로 스키마를 관리
 // realm.close();
 const realm = new Realm({
-  schema: [User, Follower, Following, Post, Comment, Basket],
-  schemaVersion: 22,
+  schema: [
+    User,
+    Follower,
+    Following,
+    Post,
+    Comment,
+    Basket,
+    SearchRanking,
+    Marker,
+  ],
+  schemaVersion: 41,
 });
 
 // console.log('Realm Path:', realm.path);
 
 const users = realm.objects('User');
+
 // console.log(users);
+
+// realm.write(() => {
+//   realm.deleteAll('SearchRanking');
+// });
 
 // 데이터 삭제 트랜잭션
 // realm.write(() => {

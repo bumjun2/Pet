@@ -15,6 +15,7 @@ import realm from '../../realm/Realm';
 const UserPicture = ({changeText}) => {
   const {on} = useContext(Context);
   const [img, setImg] = useState(on.userImg);
+  console.log(on);
 
   const onAddImage = () => {
     launchImageLibrary(

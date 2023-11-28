@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {
+  Button,
   FlatList,
   Image,
   StyleSheet,
@@ -13,18 +14,19 @@ import realm from '../../../realm/Realm';
 
 const Basket = ({route}) => {
   const {on, setOn} = useContext(Context);
-  console.log(on.basket);
 
   const removeItemFromBasket = (item, index) => {
     realm.write(() => {
-      realm.delete(on.basket[index]);
-      console.log(on.basket);
+      const itemToDelete = realm
+        .objects('Basket')
+        .filtered('id == $0', item.id);
+      realm.delete(itemToDelete);
     });
-    // 상태 업데이트
+
     setOn(prevOn => {
       return {
         ...prevOn,
-        basket: prevOn.basket.filter((item, i) => i !== index),
+        basket: prevOn.basket.filter((_, i) => i !== index),
       };
     });
   };
@@ -49,6 +51,7 @@ const Basket = ({route}) => {
             <View
               style={{
                 margin: 10,
+                marginTop: 20,
                 flexDirection: 'row',
                 borderColor: 'pink',
                 borderWidth: 3,
@@ -56,8 +59,21 @@ const Basket = ({route}) => {
                 position: 'relative',
               }}>
               <TouchableOpacity
-                onPress={() => removeItemFromBasket(item, index)}>
-                <Text>삭제</Text>
+                onPress={() => removeItemFromBasket(item, index)}
+                style={{
+                  position: 'absolute',
+                  top: -18,
+                  left: 5,
+                }}>
+                <View
+                  style={{
+                    width: 25,
+                    height: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{color: 'red'}}>삭제</Text>
+                </View>
               </TouchableOpacity>
 
               <Image
@@ -65,7 +81,12 @@ const Basket = ({route}) => {
                 style={{width: 150, height: 100, borderRadius: 10}}
               />
 
-              <View style={{height: 'auto', justifyContent: 'space-around'}}>
+              <View
+                style={{
+                  height: 'auto',
+                  justifyContent: 'space-around',
+                  width: 150,
+                }}>
                 <Text style={styles.font}>{item.titel}</Text>
                 <Text style={styles.font}>가격: {item.price}</Text>
                 <Text style={styles.font}>수량: {item.quantity}</Text>

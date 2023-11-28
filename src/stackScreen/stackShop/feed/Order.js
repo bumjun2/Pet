@@ -51,15 +51,6 @@ const Order = ({onSort}) => {
           높은가격순
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleOptionClick('판매량순')}>
-        <Text
-          style={[
-            styles.text,
-            isOptionSelected('판매량순') && styles.selectedText,
-          ]}>
-          판매량순
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 };

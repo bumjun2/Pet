@@ -12,12 +12,10 @@ const PetsPost = ({onModalToggle, post}) => {
       </View>
       <View style={styles.imgSet}>
         <Image style={styles.img} source={{uri: post.img}} />
+        <Text style={{margin: 10, fontWeight: '700'}}>{post.title}</Text>
       </View>
       <View style={styles.review}>
         <PostRiew onModalToggle={onModalToggle} />
-      </View>
-      <View style={{marginTop: 10}}>
-        <Text>{post.title}</Text>
       </View>
     </View>
   );
@@ -32,9 +30,10 @@ const styles = StyleSheet.create({
     height: '70%',
   },
   img: {
+    borderRadius: 20,
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    height: '90%',
   },
 });
 

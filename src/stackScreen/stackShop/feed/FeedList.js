@@ -1,44 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import FeedListItem from './FeedListItem';
 import {FlatList} from 'react-native-gesture-handler';
 import Order from './Order';
+import Context from '../context/Context';
 
-const data = [
-  {
-    key: '1',
-    imageSource: require('../../../assets/FeedList/list1.jpeg'),
-    title: '도그랑 개사료 진도골드 10kg(1+1)',
-    price: 30000,
-  },
-  {
-    key: '2',
-    imageSource: require('../../../assets/FeedList/list2.jpeg'),
-    title: '탐사 6free 강아지 사료 연어 레시피',
-    price: 29000,
-  },
-  {
-    key: '3',
-    imageSource: require('../../../assets/FeedList/list3.png'),
-    title: '도그랑 클래식 전연령 사료 중소형',
-    price: 36000,
-  },
-  {
-    key: '4',
-    imageSource: require('../../../assets/FeedList/list4.jpeg'),
-    title: '로얄캐닌 어덜트 독 미니 인도어 (실내견용) 건식사료',
-    price: 80800,
-  },
-  {
-    key: '5',
-    imageSource: require('../../../assets/FeedList/list5.png'),
-    title: '네츄럴코어 퍼피 에코5 유기농 70% 작은입자 강아지사료',
-    price: 43500,
-  },
-];
-
-const FeedList = ({navigation, click}) => {
+const FeedList = ({navigation, click, data}) => {
   const [sortedData, setSortedData] = useState(data);
+  const {shop, setShop} = useContext(Context);
 
   const handleSort = option => {
     if (option === '랭킹순') {

@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   userImage: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 50,
     backgroundColor: 'red',
     marginTop: 10,
@@ -24,9 +24,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 15,
-    fontWeight: 'bold',
-    color: 'black',
-    marginTop: 20,
+    marginTop: 25,
     marginLeft: 20,
   },
 });

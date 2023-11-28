@@ -1,6 +1,6 @@
 // src/screens/SignupScreen.js
 import React, {useContext, useState} from 'react';
-import {View, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import {View, TextInput, Button, StyleSheet, Alert, Text} from 'react-native';
 import realm from '../../realm/Realm';
 const SignupScreen = ({navigation}) => {
   const [userId, setUserId] = useState('');
@@ -31,6 +31,16 @@ const SignupScreen = ({navigation}) => {
         });
         navigation.navigate('NickName', userId);
       });
+      const a = realm.objects('User').filtered('id = $0', userId)[0];
+      realm.write(() => {
+        realm.create('Marker', {
+          id: a.id,
+          maker: a.address,
+          nickName: '',
+          img: '',
+          comment: '',
+        });
+      });
     }
   };
 
@@ -52,7 +62,7 @@ const SignupScreen = ({navigation}) => {
 
       <TextInput
         style={styles.input}
-        placeholder="address"
+        placeholder="정확한 지역 이름"
         value={address}
         onChangeText={setAdrass}
       />
@@ -91,7 +101,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 16,
-    paddingLeft: 8,
+    paddingLeft: 10,
+    borderRadius: 20,
   },
   redInput: {
     height: 40,

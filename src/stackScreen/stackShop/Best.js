@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Image, StyleSheet, Text, Touchable, View} from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native-gesture-handler';
 import FeedListItem from './feed/FeedListItem';
 
-const Best = () => {
+const Best = ({data, data2, data3, data4}) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionClick = option => {
@@ -23,9 +27,25 @@ const Best = () => {
         padding: 10,
         margin: 5,
       }}>
-      <Text style={{color: 'pink', fontSize: 20, fontWeight: '700'}}>
-        카테고리별 랭킹!
-      </Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'relative',
+        }}>
+        <Text style={{color: 'pink', fontSize: 20, fontWeight: '700'}}>
+          카테고리별 랭킹!
+        </Text>
+
+        <Text
+          style={{position: 'absolute', right: 0}}
+          onPress={() => {
+            handleOptionClick(null);
+          }}>
+          내리기
+        </Text>
+      </View>
       <View
         style={{
           flexDirection: 'row',
@@ -71,7 +91,97 @@ const Best = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View></View>
+      {isOptionSelected('사료') ? (
+        <FlatList
+          data={data}
+          renderItem={({item}) => (
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={item.imageSource}
+                  style={{width: 100, height: 100}}
+                />
+                <Text style={{marginLeft: 20, width: 150, fontWeight: '700'}}>
+                  {item.title}
+                </Text>
+              </View>
+            </View>
+          )}
+        />
+      ) : isOptionSelected('간식') ? (
+        <FlatList
+          data={data4}
+          renderItem={({item}) => (
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={item.imageSource}
+                  style={{width: 100, height: 100}}
+                />
+                <Text style={{marginLeft: 20, width: 150, fontWeight: '700'}}>
+                  {item.title}
+                </Text>
+              </View>
+            </View>
+          )}
+        />
+      ) : isOptionSelected('악세사리') ? (
+        <FlatList
+          data={data3}
+          renderItem={({item}) => (
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={item.imageSource}
+                  style={{width: 100, height: 100}}
+                />
+                <Text style={{marginLeft: 20, width: 150, fontWeight: '700'}}>
+                  {item.title}
+                </Text>
+              </View>
+            </View>
+          )}
+        />
+      ) : isOptionSelected('샤워') ? (
+        <FlatList
+          data={data2}
+          renderItem={({item}) => (
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={item.imageSource}
+                  style={{width: 100, height: 100}}
+                />
+                <Text style={{marginLeft: 20, width: 150, fontWeight: '700'}}>
+                  {item.title}
+                </Text>
+              </View>
+            </View>
+          )}
+        />
+      ) : (
+        <View></View>
+      )}
     </View>
   );
 };

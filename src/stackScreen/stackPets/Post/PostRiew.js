@@ -23,7 +23,7 @@ const PostRiew = ({onModalToggle}) => {
       style={{
         flexDirection: 'row',
       }}>
-      <TouchableOpacity onPress={handleIconPress} style={{marginTop: 10}}>
+      <TouchableOpacity onPress={handleIconPress} style={{margin: 10}}>
         <Icon
           name={inputIcon ? 'thumb-up-alt' : 'thumb-up-off-alt'}
           size={40}
@@ -37,7 +37,7 @@ const PostRiew = ({onModalToggle}) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={starHandler}
-        style={{marginTop: 10, marginLeft: 240}}>
+        style={{marginTop: 10, marginLeft: 200}}>
         <Icon
           name={starIcon ? 'turned-in' : 'turned-in-not'}
           size={40}

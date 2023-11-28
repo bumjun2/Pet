@@ -6,29 +6,33 @@ import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Context from './context/Context';
 
-const Advertisement = ({navigation}) => {
+const Advertisement = ({navigation, data, data2, data3, data4}) => {
   const [hover, setHover] = useState(false);
-  const [search, setSearch] = useState(false);
   const {on} = useContext(Context);
 
   const images = [
-    require('../../assets/강아지.jpeg'),
-    require('../../assets/고양이.jpeg'),
-    require('../../assets/알파카.jpeg'),
+    require('../../Assets/re/1.png'),
+    require('../../Assets/re/2.png'),
+    require('../../Assets/re/3.png'),
   ];
 
   const handleMouse = () => {
     setHover(!hover);
   };
 
-  const searchHandler = () => {
-    setSearch(!search);
-  };
-
   return (
     <SafeAreaView>
       <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-        <TouchableOpacity style={{margin: 10}} onPress={searchHandler}>
+        <TouchableOpacity
+          style={{margin: 10}}
+          onPress={() =>
+            navigation.navigate('Search', {
+              data,
+              data2,
+              data3,
+              data4,
+            })
+          }>
           <Icon name="search" size={30} color={'black'} />
         </TouchableOpacity>
         <View style={{margin: 10, position: 'relative'}}>

@@ -13,19 +13,27 @@ import realm from '../../../realm/Realm';
 const Goods = ({route, navigation}) => {
   const {on, setOn} = useContext(Context);
   const [Count, setCount] = useState(1);
-  const {imageSource, title, price} = route.params;
-  const [upPrice, setUpPrice] = useState(price);
+  const {imageSource, title, price, item} = route.params;
+  const [upPrice, setUpPrice] = useState(price || item.price);
   const {data, setData} = useContext(Context);
 
   const CountUpHandler = () => {
     setCount(Count + 1);
-    setUpPrice(upPrice + price);
+    if (price == null) {
+      setUpPrice(upPrice + item.price);
+    } else {
+      setUpPrice(upPrice + price);
+    }
   };
 
   const CountDownHandler = () => {
     if (Count > 0) {
       setCount(Count - 1);
-      setUpPrice(upPrice - price);
+      if (price == null) {
+        setUpPrice(upPrice - item.price);
+      } else {
+        setUpPrice(upPrice - price);
+      }
     }
   };
   const basket = () => {
@@ -36,12 +44,13 @@ const Goods = ({route, navigation}) => {
         ...on.basket,
         {
           id: Math.floor(Math.random() * 1000) + 1,
-          img: imageSource,
-          titel: title,
-          price: upPrice,
+          img: imageSource || item.img || item.imageSource,
+          titel: title || item.text || item.title,
+          price: upPrice || item.price,
           quantity: Count,
         },
       ];
+      setOn(on);
     });
 
     Alert.alert(title, '장바구니에 담겼습니다', [
@@ -59,8 +68,11 @@ const Goods = ({route, navigation}) => {
   };
   return (
     <View style={{position: 'relative', flex: 1}}>
-      <Image source={imageSource} style={styles.image} />
-      <Text style={styles.title}>{title}</Text>
+      <Image
+        source={imageSource || item.img || item.imageSource}
+        style={styles.image}
+      />
+      <Text style={styles.title}>{title || item.text || item.title}</Text>
       <View
         style={{
           marginTop: 10,
@@ -68,7 +80,7 @@ const Goods = ({route, navigation}) => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <Text style={styles.price}>{upPrice}원</Text>
+        <Text style={styles.price}>{upPrice || item.price}원</Text>
         <View
           style={{
             flexDirection: 'row-reverse',
@@ -103,7 +115,16 @@ const Goods = ({route, navigation}) => {
           }}>
           <Text style={styles.buttonText}>장바구니 담기</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button2}>
+        <TouchableOpacity
+          style={styles.button2}
+          onPress={() => {
+            navigation.navigate('Payment', {
+              imageSource,
+              upPrice,
+              title,
+              item,
+            });
+          }}>
           <Text style={styles.buttonText2}>바로 구매하기</Text>
         </TouchableOpacity>
       </View>

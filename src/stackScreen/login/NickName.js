@@ -17,6 +17,7 @@ const NickName = ({navigation, route}) => {
   const [respons, setRespons] = useState(null);
   const userID = route.params;
   const [changText, setChangText] = useState('');
+  const [comment, setComment] = useState('');
 
   const onAddImage = () => {
     launchImageLibrary(
@@ -42,8 +43,14 @@ const NickName = ({navigation, route}) => {
   const Sinup = () => {
     realm.write(() => {
       const username = realm.objects('User').filtered('id = $0', userID)[0];
+      const marker = realm.objects('Marker').filtered('id = $0', userID)[0];
       if (username) {
         username.nickName = changText;
+      }
+      if (marker) {
+        marker.nickName = changText;
+        marker.comment = comment;
+        marker.img = username.userImg;
       }
 
       navigation.navigate('Login');
@@ -73,12 +80,18 @@ const NickName = ({navigation, route}) => {
       </TouchableOpacity>
 
       <TextInput
-        style={{width: '50%'}}
+        style={{width: '50%', marginTop: 10}}
         placeholder="강아지 이름 기록해주세요"
         textAlign="center"
         onChangeText={setChangText}
       />
-      <View style={{width: '40%'}}>
+      <TextInput
+        style={{width: '50%', marginTop: 10}}
+        placeholder="짧게 소개해주세요"
+        textAlign="center"
+        onChangeText={setComment}
+      />
+      <View style={{width: '40%', marginTop: 10}}>
         <Button title="가입완료" onPress={Sinup}></Button>
       </View>
     </View>

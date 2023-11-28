@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import {View, TextInput, Button, StyleSheet, Alert, Image} from 'react-native';
 import Context from '../stackShop/context/Context';
 import realm from '../../realm/Realm';
 
@@ -27,6 +27,7 @@ const LoginScreen = ({navigation, setLogin}) => {
 
   return (
     <View style={styles.container}>
+      <Image source={require('../../Assets/petsicon.png')} style={styles.img} />
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -61,14 +62,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     padding: 16,
   },
   input: {
+    width: '80%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 16,
-    paddingLeft: 8,
+    paddingLeft: 10,
+    borderRadius: 20,
+  },
+  img: {
+    height: 100,
+    width: 100,
+    marginBottom: 10,
   },
 });
 

@@ -1,42 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import Order from '../feed/Order';
 import FeedListItem from '../feed/FeedListItem';
+import Context from '../context/Context';
 
-const data = [
-  {
-    key: '1',
-    imageSource: require('../../../assets/SnackList/list1.jpeg'),
-    title: '굿데이 건강한육포 반려견간식 300g',
-    price: 11500,
-  },
-  {
-    key: '2',
-    imageSource: require('../../../assets/SnackList/list2.jpeg'),
-    title: '킵펫 말랑말랑 노즈워크 져키 강아지 간식 1kg',
-    price: 12900,
-  },
-  {
-    key: '3',
-    imageSource: require('../../../assets/SnackList/list3.jpeg'),
-    title: '페페로니 반려견간식 오메가3 져키 연어 180g + 소고기 180g',
-    price: 11400,
-  },
-  {
-    key: '4',
-    imageSource: require('../../../assets/SnackList/list4.jpeg'),
-    title: '굿데이 강아지간식 건강한 육포 300g',
-    price: 11900,
-  },
-  {
-    key: '5',
-    imageSource: require('../../../assets/SnackList/list5.jpeg'),
-    title: '펫더맨 마이도기 강아지 간식 300g',
-    price: 15590,
-  },
-];
-
-const SnackList = ({navigation}) => {
+const SnackList = ({navigation, data}) => {
   const [sortedData, setSortedData] = useState(data);
 
   const handleSort = option => {

@@ -19,6 +19,11 @@ import realm from '../../../realm/Realm';
 const OldPost = ({route}) => {
   const {on} = useContext(Context);
   const {post} = route.params;
+  const [inputIcon, setInputIcon] = useState(false);
+
+  const handleIconPress = () => {
+    setInputIcon(!inputIcon);
+  };
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [text, setText] = useState('');
@@ -48,35 +53,47 @@ const OldPost = ({route}) => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={{flexDirection: 'row', height: '10%'}}>
         <Image
           source={{uri: on.userImg}}
           style={{width: 50, height: 50, borderRadius: 50, margin: 20}}
         />
-        <Text style={{marginTop: 25}}>{on.nickName}</Text>
+        <Text style={{marginTop: 35}}>{on.nickName}</Text>
       </View>
       <Image
         source={{uri: post.img}}
-        style={{width: '100%', height: '70%', marginTop: 20}}
+        style={{
+          width: '100%',
+          height: '60%',
+          marginTop: 15,
+          borderRadius: 20,
+        }}
       />
+
+      <Text style={{fontWeight: '700', margin: 10}}>{post.title}</Text>
       <View
         style={{
           flexDirection: 'row',
         }}>
-        <TouchableOpacity style={{marginTop: 10}}>
-          <Icon name="thumb-up-alt" size={40} color={'black'} />
+        <TouchableOpacity
+          onPress={handleIconPress}
+          style={{marginTop: 10, margin: 10}}>
+          <Icon
+            name={inputIcon ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+            size={40}
+            color={'black'}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={{marginTop: 10, marginLeft: 10}}
           onPress={() => setModalVisible(true)}>
           <Icon name="messenger-outline" size={40} color={'black'} />
         </TouchableOpacity>
-        <TouchableOpacity style={{marginTop: 10, marginLeft: 240}}>
+        <TouchableOpacity style={{marginTop: 10, marginLeft: 200}}>
           <Icon name="turned-in-not" size={40} color={'black'} />
         </TouchableOpacity>
       </View>
-      <Text>{post.title}</Text>
 
       <Modal
         animationType="slide"
