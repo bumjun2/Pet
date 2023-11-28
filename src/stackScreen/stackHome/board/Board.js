@@ -119,7 +119,7 @@ const Board = () => {
               {marker.img ? (
                 <Image
                   source={{uri: marker.img}}
-                  style={{width: 30, height: 30}}
+                  style={{width: 30, height: 30, borderRadius: 20}}
                 />
               ) : null}
             </Marker>
